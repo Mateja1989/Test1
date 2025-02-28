@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Video Player</title>
+    <style>
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .video-block {
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+        .thumbnail {
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+        /* Added styles to ensure content fills iframe */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="blocks-image">
+        <!-- Replace with your thumbnail image URL -->
+        <img src="YOUR_THUMBNAIL_IMAGE_URL" alt="Video Thumbnail" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <div class="blocks-video">
+        <!-- Replace with your video URL -->
+        <video src="YOUR_VIDEO_URL" controls style="width: 100%; height: 100%;"></video>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var thumbnail = document.querySelector('.blocks-image');
+            var videoBlock = document.querySelector('.blocks-video');
+            
+            if (thumbnail && videoBlock) {
+                var wrapper = document.createElement('div');
+                wrapper.className = 'video-wrapper';
+                thumbnail.parentNode.insertBefore(wrapper, thumbnail);
+                wrapper.appendChild(thumbnail);
+                wrapper.appendChild(videoBlock);
+                
+                thumbnail.classList.add('thumbnail');
+                videoBlock.classList.add('video-block');
+                
+                thumbnail.addEventListener('click', function() {
+                    thumbnail.style.display = 'none';
+                    videoBlock.style.display = 'block';
+                    var video = videoBlock.querySelector('video');
+                    if (video) {
+                        video.play();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
